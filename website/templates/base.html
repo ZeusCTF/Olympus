@@ -19,6 +19,16 @@
             <a href="/">Home</a>
         </li>
     </ul>
+    <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for message in messages %}
+            <div> <h1>{{ message }}</h1> </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </div>
     {% endblock %}
 
     {% block content %} {% endblock %}
