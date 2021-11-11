@@ -13,10 +13,13 @@
     {% block navbar %}
     <ul>
         <li>
-            <a href="/login">Login</a>
-            <a href="/logout">Logout</a>
-            <a href="/sign-up">Sign Up</a>
+            {% if user.is_authenticated %}
             <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="/sign-up">Sign Up</a>
+            {% endif %}
         </li>
     </ul>
     <div>
