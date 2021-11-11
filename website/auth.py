@@ -11,7 +11,7 @@ def login():
     #this is just accessing the form data being sent
     #data = request.form
     if request.method == 'POST':
-        username = request.form.get('username')
+        username = request.form.get('userName')
         password = request.form.get('password')
 
         user = User.query.filter_by(username=username).first()
