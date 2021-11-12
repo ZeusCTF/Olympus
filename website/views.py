@@ -6,9 +6,14 @@ from . import db
 
 views = Blueprint('views', __name__)
 
-@views.route('/', methods=['GET','POST'])
+@views.route('/')
 @login_required
 def home():
+    return render_template("home.html", user=current_user)
+
+@views.route('/vault', methods=['GET','POST'])
+@login_required
+def vault():
     if request.method  == 'POST':
         username = request.form.get('vault_userName')
         password = request.form.get('vault_password')
@@ -18,4 +23,4 @@ def home():
         db.session.commit
         flash('Added to the vault!', category='success')
 
-    return render_template("home.html", user=current_user)
+    return render_template("vault.html", user=current_user)

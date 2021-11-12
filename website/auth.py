@@ -20,6 +20,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully', category='success')
                 login_user(user, remember=True)
+                return redirect(url_for('views.home', user=current_user))
             else:
                 flash('Incorrect password', category='error')
         else:
@@ -27,6 +28,8 @@ def login():
 
     # the 'text=' portion sets a variable that can then be accessed in the correspondig html code: text='value'
     return render_template("login.html", user=current_user)
+
+
 
 @auth.route('/logout')
 #this makes it so this can only be accessed if the user is logged in
