@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %} Vault {% endblock %}
+{% block content %}
+<h1  align=Center>Vault</h1>
+
+<ul id=creds>
+    {% for cred in user.credentials %}
+    <li>{{ cred.username }}</li>
+    <li>{{ cred.password }}</li>
+    {% endfor %}
+
+</ul>
+
+
+<form method="POST" action="">
+    <div>
+        <label for="vault_userName">Username or Email</label>
+        <input type="text" id="vault_userName" name="vault_userName" placeholder="Username/email"/>
+    </div>
+    <div>
+        <label for="vault_password">Password</label>
+        <input type="password" id="vault_password" name="vault_password" placeholder="Password"/>
+    </div>
+    <br />
+    <button type="submit">Add to Vault</button>
+</form>
+
+{% endblock %}
