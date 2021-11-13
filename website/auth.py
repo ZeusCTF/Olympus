@@ -55,9 +55,7 @@ def sign_up():
         db.session.commit()
         
         flash('Account created', category='success')
-        login_user(user, remember=True)
-        return redirect(url_for('views.home', user=current_user))
-
-
+        return redirect(url_for('auth.login', user=current_user))
+        #the goal is to login the user as soon as they sign up, maybe we need to redirect directly to the home page?
 
     return render_template("signup.html", user=current_user)

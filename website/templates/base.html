@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% block head %}
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='nav.css') }}">
+    {% endblock %}
     <title>{% block title %} {% endblock %}</title>
 </head>
-    {% endblock %}
 <body>
     {% block navbar %}
-    <ul>
-        <li>
+    <nav id=nav>
+    <ul id=nav>
+        <li id=nav>
             {% if user.is_authenticated %}
-            <a href="/">Home</a>
-            <a href="/logout">Logout</a>
-            <a href="/vault">Vault</a>
+            <a href="/" id=nav>Home</a>
+            <a href="/logout" id=nav>Logout</a>
+            <a href="/vault" id=nav>Vault</a>
             {% else %}
-            <a href="/login">Login</a>
-            <a href="/sign-up">Sign Up</a>
+            <a href="/login" id=nav>Login</a>
+            <a href="/sign-up" id=nav>Sign Up</a>
             {% endif %}
         </li>
     </ul>
+    </nav>
     <div>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

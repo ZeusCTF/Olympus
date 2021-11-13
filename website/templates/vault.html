@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 {% block title %} Vault {% endblock %}
+<script src= "{{ url_for('static',filename='vault.js') }}"></script>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='vault.css') }}">
 {% block content %}
 <h1  align=Center>Vault</h1>
 
-<ul id=creds>
+<div id=vault>
+<ul>
     {% for cred in user.credentials %}
+    <li>{{ cred.url }}</li>
     <li>{{ cred.username }}</li>
-    <li>{{ cred.password }}</li>
+    <li id="vaultPass">{{ cred.password }}</li>
     {% endfor %}
-
 </ul>
-
+<button onclick="hidePass()">Show Password</button>
+</div>
 
 <form method="POST" action="">
+    <div>
+        <label for="vault_url">URL</label>
+        <input type="text" id="vault_url" name="vault_url" placeholder="Example.com"/>
+    </div>
     <div>
         <label for="vault_userName">Username or Email</label>
         <input type="text" id="vault_userName" name="vault_userName" placeholder="Username/email"/>
