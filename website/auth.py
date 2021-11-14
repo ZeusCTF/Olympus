@@ -14,20 +14,22 @@ def login():
     if request.method == 'POST':
         username = request.form.get('userName')
         password = request.form.get('password')
-
-        user = User.query.filter_by(username=username).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash('Logged in successfully', category='success')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home', user=current_user))
-            else:
-                flash('Incorrect password', category='error')
-        else:
-            flash('Username does not exist', category='error')
+        checkLogin(username,password)
+        return redirect(url_for('views.home', user=current_user))
 
     # the 'text=' portion sets a variable that can then be accessed in the correspondig html code: text='value'
     return render_template("login.html", user=current_user)
+
+def checkLogin(username, password):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        if check_password_hash(user.password, password):
+            login_user(user, remember=True)
+            flash('Logged in successfully', category='success')
+        else:
+                flash('Incorrect password', category='error')
+    else:
+        flash('Username does not exist', category='error')
 
 
 
@@ -53,9 +55,13 @@ def sign_up():
         new_user = User(username=username, password=generate_password_hash(password, method='sha256'))
         db.session.add(new_user)
         db.session.commit()
-        
+
         flash('Account created', category='success')
-        return redirect(url_for('auth.login', user=current_user))
+        
+        checkLogin(username, password)
+        return redirect(url_for('views.home', user=current_user))
+        #we want to login the user, trying to match some stuff from the login function
         #the goal is to login the user as soon as they sign up, maybe we need to redirect directly to the home page?
 
-    return render_template("signup.html", user=current_user)
+    elif request.method == 'GET':
+        return render_template("signup.html", user=current_user)
