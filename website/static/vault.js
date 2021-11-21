@@ -6,4 +6,3 @@ function hidePass() {
          password.style.display = 'none';
      }
  }
- 

@@ -21,7 +21,7 @@ def vault():
         
         new_cred = Passwords(url=url, username=username, password=password, user_id=current_user.id)
         db.session.add(new_cred)
-        db.session.commit
+        db.session.commit()
         flash('Added to the vault!', category='success')
 
     return render_template("vault.html", user=current_user)
